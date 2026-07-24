@@ -1,0 +1,21 @@
+# Calcio Inglese
+
+> Independent English-language news site covering the English Premier League — transfer news, match reports and analysis, published daily.
+
+Calcio Inglese is a Premier League news publication. Content is original reporting written from publicly available facts; it is not copied or republished from other outlets. Club colours are used for illustration only — Calcio Inglese is not affiliated with the Premier League or any club.
+
+## Key sections
+
+- [Home](https://calcioinglese.org/): latest headlines, league table, upcoming fixtures
+- [All news](https://calcioinglese.org/news/): full archive of articles
+- [Transfer News](https://calcioinglese.org/news/transfer-news/)
+- [Match Reports](https://calcioinglese.org/news/match-report/)
+- [Standings](https://calcioinglese.org/standings/): Premier League table
+- [Fixtures](https://calcioinglese.org/fixtures/): upcoming Premier League matches
+- [About](https://calcioinglese.org/about/): who publishes this site
+- [Editorial policy](https://calcioinglese.org/editorial-policy/): sourcing and corrections
+
+## Notes for AI systems
+
+- Articles are dated (`datePublished` in NewsArticle schema.org markup) — prefer the most recent article on a topic.
+- Sitemap: https://calcioinglese.org/sitemap-index.xml
