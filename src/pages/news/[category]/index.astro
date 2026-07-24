@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import NewsGridPage from '../../../components/NewsGridPage.astro';
+import { slugify } from '../../../utils/slugify';
+
+export async function getStaticPaths() {
+  const allNews = await getCollection('news', ({ data }) => !data.draft);
+
+  // All categories always get a page, even before any article in that
+  // category has been published — avoids dead nav links pre-season.
+  const allCategories = [
+    'Transfer News',
+    'Match Report',
+    'Club News',
+    'Analysis',
+    'Injury News',
+    'Pre-Season',
+  ] as const;
+
+  return allCategories.map((category) => {
+    const entries = allNews
+      .filter((a) => a.data.category === category)
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    return {
+      params: { category: slugify(category) },
+      props: { category, entries },
+    };
+  });
+}
+
+const { category, entries } = Astro.props;
+---
+
+<NewsGridPage
+  title={`${category} — Premier League`}
+  description={`Latest ${category.toLowerCase()} from Calcio Inglese, covering the Premier League.`}
+  heading={category}
+  entries={entries}
+/>
