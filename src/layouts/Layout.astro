@@ -1,0 +1,93 @@
+---
+import '@fontsource/archivo-black';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  type?: 'website' | 'article';
+  ogImage?: string;
+  publishedDate?: Date;
+  modifiedDate?: Date;
+  articleSchema?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  type = 'website',
+  ogImage = '/og-image.png',
+  publishedDate,
+  modifiedDate,
+  articleSchema,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const absoluteOgImage = new URL(ogImage, Astro.site);
+const siteName = 'Calcio Inglese';
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsMediaOrganization',
+  name: siteName,
+  alternateName: 'Calcio Inglese — Premier League News',
+  url: 'https://calcioinglese.org',
+  logo: 'https://calcioinglese.org/logo-mark-512.png',
+  description:
+    'Independent English-language coverage of the Premier League — news, transfers and analysis, published daily.',
+};
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <meta property="og:type" content={type} />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={absoluteOgImage} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={absoluteOgImage} />
+
+  {publishedDate && (
+    <meta property="article:published_time" content={publishedDate.toISOString()} />
+  )}
+  {modifiedDate && (
+    <meta property="article:modified_time" content={modifiedDate.toISOString()} />
+  )}
+
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  {articleSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  )}
+</head>
+<body>
+  <Header />
+  <main id="main-content">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>
