@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import StandingsWidget from '../../components/StandingsWidget.astro';
+---
+
+<Layout
+  title="Premier League Table"
+  description="Premier League standings, updated throughout the 2026/27 season."
+>
+  <div class="wrap standings-page">
+    <h1>Premier League table</h1>
+    <p class="intro">The 2026/27 season kicks off on Friday 21 August. Until the first results are in, here's the final table from last season.</p>
+    <div class="widget-wrap">
+      <StandingsWidget />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .standings-page { padding: 30px 0 60px; max-width: 640px; }
+  h1 { font-family: 'Archivo Black', sans-serif; font-size: 28px; margin-bottom: 10px; }
+  .intro { color: var(--gray); margin-bottom: 24px; }
+</style>
