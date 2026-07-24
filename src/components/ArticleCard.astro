@@ -1,0 +1,83 @@
+---
+import ArticleThumb from './ArticleThumb.astro';
+
+export interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  teamA?: string;
+  teamB?: string;
+  pubDate: Date;
+  author: string;
+  size?: 'hero' | 'side' | 'grid';
+}
+
+const {
+  slug,
+  title,
+  description,
+  category,
+  teamA,
+  teamB,
+  pubDate,
+  author,
+  size = 'grid',
+} = Astro.props;
+
+function timeAgo(date: Date) {
+  const diffMs = Date.now() - date.getTime();
+  const hours = Math.floor(diffMs / 3_600_000);
+  if (hours < 1) return 'Just now';
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
+---
+
+<a href={`/news/${slug}/`} class={`card article-card ${size}`}>
+  <div class="thumb">
+    <ArticleThumb category={category} teamA={teamA} teamB={teamB} />
+  </div>
+  <div class="body">
+    {size === 'grid' && <span class="cat">{category}</span>}
+    <h3>{title}</h3>
+    {size === 'hero' && <p class="dek">{description}</p>}
+    <div class="meta">
+      {size === 'hero' && <b>{author}</b>}
+      {size === 'hero' ? ' · ' : ''}
+      <time datetime={pubDate.toISOString()}>{timeAgo(pubDate)}</time>
+    </div>
+  </div>
+</a>
+
+<style>
+  .article-card { display: block; }
+  .thumb { aspect-ratio: 16 / 9; }
+  .thumb svg { width: 100%; height: 100%; display: block; }
+  .body { padding: 14px 16px 16px; }
+  .cat {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+  h3 { font-size: 15.5px; font-weight: 800; line-height: 1.32; margin-bottom: 8px; }
+  .meta { font-size: 12.5px; color: var(--gray); font-weight: 600; }
+  .meta b { color: var(--ink); }
+
+  .article-card.hero .body { padding: 20px 22px 24px; }
+  .article-card.hero h3 { font-family: 'Archivo Black', sans-serif; font-size: 26px; line-height: 1.22; margin-bottom: 10px; }
+  .article-card.hero .dek { color: var(--gray); font-size: 15px; margin-bottom: 12px; font-weight: 400; }
+
+  .article-card.side .body { padding: 14px 16px; }
+  .article-card.side h3 { font-size: 15px; margin-bottom: 6px; }
+  .article-card.side .meta { font-size: 11.5px; }
+
+  @media (max-width: 860px) {
+    .article-card.hero h3 { font-size: 22px; }
+  }
+</style>

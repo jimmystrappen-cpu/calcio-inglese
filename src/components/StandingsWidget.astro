@@ -1,0 +1,83 @@
+---
+import { STANDINGS, STANDINGS_LABEL } from '../data/standings';
+import { TEAMS } from '../data/teams';
+---
+
+<div class="widget">
+  <div class="widget-head">
+    <span>Premier League table</span>
+    <span class="widget-sub">{STANDINGS_LABEL}</span>
+  </div>
+  <table class="standings">
+    <thead>
+      <tr><th>#</th><th>Club</th><th>P</th><th class="num">Pts</th></tr>
+    </thead>
+    <tbody>
+      {STANDINGS.map((row) => {
+        const team = TEAMS[row.team];
+        return (
+          <tr class={row.qualifies === 'ucl' ? 'qual' : ''}>
+            <td class="pos">{row.pos}</td>
+            <td>
+              <div class="team-cell">
+                <span class="dot" style={`background:${team.primary}`}></span>
+                {team.name}
+              </div>
+            </td>
+            <td>{row.played}</td>
+            <td class="num">{row.points}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+  <a class="widget-more" href="/standings/">Full table →</a>
+</div>
+
+<style>
+  .widget {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .widget-head {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 13px;
+    letter-spacing: .03em;
+    padding: 12px 16px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .widget-sub { font-family: 'Inter', sans-serif; font-size: 9.5px; color: #9CA9C2; text-transform: none; letter-spacing: 0; }
+  table.standings { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.standings th {
+    text-align: left;
+    font-size: 10.5px;
+    color: var(--gray);
+    font-weight: 700;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  table.standings td { padding: 9px 12px; border-bottom: 1px solid var(--line); }
+  table.standings tbody tr:last-child td { border-bottom: none; }
+  td.pos { font-weight: 800; width: 22px; }
+  td.num, th.num { font-weight: 800; text-align: right; }
+  .qual { box-shadow: inset 3px 0 0 var(--green); }
+  .team-cell { display: flex; align-items: center; gap: 8px; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+  .widget-more {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--green-dark);
+    border-top: 1px solid var(--line);
+  }
+</style>

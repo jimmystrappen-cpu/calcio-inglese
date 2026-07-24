@@ -1,0 +1,66 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <img src="/logo-header.png" alt="Calcio Inglese" class="foot-logo" />
+      <p class="foot-blurb">Independent English-language coverage of the Premier League — news, transfers and analysis, published daily.</p>
+    </div>
+    <div>
+      <h4>Coverage</h4>
+      <ul>
+        <li><a href="/news/transfer-news/">Transfer news</a></li>
+        <li><a href="/news/match-report/">Match reports</a></li>
+        <li><a href="/standings/">Standings</a></li>
+        <li><a href="/fixtures/">Fixtures</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/editorial-policy/">Editorial policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>&copy; {year} Calcio Inglese. All rights reserved.</span>
+    <span>calcioinglese.org</span>
+  </div>
+</footer>
+
+<style>
+  footer { background: var(--navy); color: #B7C1D6; margin-top: 10px; }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 30px;
+    padding: 44px 0 30px;
+  }
+  .foot-logo { height: 60px; width: auto; margin-bottom: 12px; }
+  .foot-blurb { font-size: 13px; max-width: 280px; }
+  .foot-grid h4 {
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .foot-grid ul { list-style: none; }
+  .foot-grid li { margin-bottom: 9px; font-size: 13.5px; }
+  .foot-grid a:hover { color: #fff; }
+  .foot-bottom {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding: 16px 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+  @media (max-width: 860px) {
+    .foot-grid { grid-template-columns: 1fr; }
+    .foot-bottom { flex-direction: column; gap: 6px; }
+  }
+</style>

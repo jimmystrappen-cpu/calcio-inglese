@@ -1,0 +1,53 @@
+---
+import { FIXTURES } from '../data/fixtures';
+import { TEAMS } from '../data/teams';
+---
+
+<div class="widget">
+  <div class="widget-head">Upcoming fixtures</div>
+  {FIXTURES.map((f) => (
+    <div class="fixture">
+      <span class="when">{f.when}</span>
+      <span class="match">{TEAMS[f.home].name} v {TEAMS[f.away].name}</span>
+    </div>
+  ))}
+  <a class="widget-more" href="/fixtures/">Full schedule →</a>
+</div>
+
+<style>
+  .widget {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .widget-head {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 13px;
+    letter-spacing: .03em;
+    padding: 12px 16px;
+    text-transform: uppercase;
+  }
+  .fixture {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+  }
+  .when { color: var(--gray); font-size: 11px; font-weight: 700; width: 92px; flex-shrink: 0; }
+  .match { font-weight: 700; }
+  .widget-more {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--green-dark);
+    border-top: 1px solid var(--line);
+  }
+</style>

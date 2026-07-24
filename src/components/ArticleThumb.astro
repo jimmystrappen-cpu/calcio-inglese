@@ -1,0 +1,50 @@
+---
+import { TEAMS } from '../data/teams';
+
+export interface Props {
+  category: string;
+  teamA?: string;
+  teamB?: string;
+}
+
+const { category, teamA, teamB } = Astro.props;
+
+const a = teamA ? TEAMS[teamA] : undefined;
+const b = teamB ? TEAMS[teamB] : undefined;
+
+const CATEGORY_COLORS: Record<string, string> = {
+  'Transfer News': '#F5A623',
+  'Match Report': '#16A34A',
+  'Club News': '#0B1930',
+  'Analysis': '#0057B8',
+  'Injury News': '#D85A30',
+  'Pre-Season': '#6C1D45',
+};
+const tagColor = CATEGORY_COLORS[category] ?? '#F5A623';
+---
+
+<svg viewBox="0 0 800 450" role="img" aria-label={`${category}${a ? ': ' + a.name : ''}${b ? ' vs ' + b.name : ''}`} xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0B1930" />
+
+  {a && b ? (
+    <>
+      <rect x="0" y="0" width="360" height="450" fill={a.primary} />
+      <rect x="440" y="0" width="360" height="450" fill={b.primary} />
+      <polygon points="360,0 440,0 400,450 320,450" fill="#0B1930" />
+      <circle cx="400" cy="225" r="56" fill="#0B1930" stroke={tagColor} stroke-width="3" />
+      <text x="400" y="235" font-family="Archivo Black" font-size="30" fill="#FFFFFF" text-anchor="middle">VS</text>
+      <text x="40" y="400" font-family="Archivo Black" font-size="28" fill={a.secondary}>{a.short}</text>
+      <text x="720" y="400" font-family="Archivo Black" font-size="28" fill={b.secondary} text-anchor="end">{b.short}</text>
+    </>
+  ) : (
+    <>
+      <rect width="800" height="450" fill="#122544" />
+      <circle cx="650" cy="120" r="180" fill={tagColor} opacity="0.14" />
+      <text x="50" y="250" font-family="Archivo Black" font-size="34" fill="#FFFFFF">CALCIO</text>
+      <text x="50" y="295" font-family="Archivo Black" font-size="34" fill="#16A34A">INGLESE</text>
+    </>
+  )}
+
+  <rect x="24" y="24" width={18 + category.length * 10.5} height="34" rx="4" fill={tagColor} />
+  <text x="34" y="47" font-family="Inter" font-weight="800" font-size="14" fill="#0B1930">{category.toUpperCase()}</text>
+</svg>

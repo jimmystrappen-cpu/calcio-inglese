@@ -1,0 +1,166 @@
+---
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/news/transfer-news/', label: 'Transfer News' },
+  { href: '/news/match-report/', label: 'Match Reports' },
+  { href: '/standings/', label: 'Standings' },
+  { href: '/fixtures/', label: 'Fixtures' },
+];
+const current = Astro.url.pathname;
+---
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <span>2026/27 SEASON — KICKS OFF FRIDAY 21 AUGUST</span>
+    <span>PREMIER LEAGUE COVERAGE</span>
+  </div>
+</div>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="masthead">
+  <a href="/" aria-label="Calcio Inglese — home">
+    <img src="/logo-full.png" alt="Calcio Inglese — Premier Football News" width="222" height="199" />
+  </a>
+</div>
+
+<header class="main">
+  <div class="wrap header-inner">
+    <a href="/" class="logo" aria-label="Calcio Inglese — home">
+      <span class="logo-text">CALCIO <span class="accent">INGLESE</span></span>
+    </a>
+
+    <nav class="primary" aria-label="Primary">
+      {nav.map((item) => (
+        <a href={item.href} class={current === item.href ? 'active' : ''}>{item.label}</a>
+      ))}
+    </nav>
+
+    <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
+    {nav.map((item) => (
+      <a href={item.href} class={current === item.href ? 'active' : ''}>{item.label}</a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const isOpen = mobileNav?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!isOpen));
+  });
+</script>
+
+<style>
+  .topbar {
+    background: var(--green);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 20px;
+    gap: 12px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    z-index: 100;
+  }
+  .skip-link:focus { left: 0; }
+
+  .masthead {
+    background: var(--navy);
+    text-align: center;
+    padding: 20px 0 16px;
+  }
+  .masthead img { height: 100px; width: auto; margin: 0 auto; }
+
+  header.main {
+    background: var(--navy-2);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 1px 0 rgba(255,255,255,.06);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .logo-text {
+    font-family: 'Archivo Black', sans-serif;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: .01em;
+  }
+  .logo-text .accent { color: var(--green); }
+
+  nav.primary { display: flex; gap: 26px; }
+  nav.primary a {
+    color: #D7DEEB;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 16px 0;
+    border-bottom: 2px solid transparent;
+    display: inline-block;
+  }
+  nav.primary a.active, nav.primary a:hover { color: #fff; border-bottom-color: var(--green); }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .menu-toggle span {
+    display: block;
+    height: 2px;
+    background: #fff;
+    border-radius: 1px;
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--navy-2);
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .mobile-nav a {
+    color: #D7DEEB;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .mobile-nav a.active { color: var(--green); }
+  .mobile-nav.open { display: flex; }
+
+  @media (max-width: 860px) {
+    .masthead img { height: 76px; }
+    nav.primary { display: none; }
+    .menu-toggle { display: flex; }
+    .topbar-inner { flex-direction: column; align-items: flex-start; gap: 2px; font-size: 10.5px; }
+  }
+</style>
