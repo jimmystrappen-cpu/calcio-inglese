@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FixturesWidget from '../../components/FixturesWidget.astro';
+---
+
+<Layout
+  title="Premier League Fixtures"
+  description="Upcoming Premier League fixtures for the 2026/27 season."
+>
+  <div class="wrap fixtures-page">
+    <h1>Fixtures</h1>
+    <p class="intro">Opening weekend of the 2026/27 Premier League season, 21–24 August.</p>
+    <div class="widget-wrap">
+      <FixturesWidget />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .fixtures-page { padding: 30px 0 60px; max-width: 640px; }
+  h1 { font-family: 'Archivo Black', sans-serif; font-size: 28px; margin-bottom: 10px; }
+  .intro { color: var(--gray); margin-bottom: 24px; }
+</style>
