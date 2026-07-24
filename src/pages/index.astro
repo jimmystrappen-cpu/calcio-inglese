@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import StandingsWidget from '../components/StandingsWidget.astro';
+import FixturesWidget from '../components/FixturesWidget.astro';
+
+const allNews = (await getCollection('news', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const [hero, side1, side2, ...rest] = allNews;
+const gridItems = rest.slice(0, 6);
+
+const trendingTags = Array.from(
+  new Set(allNews.flatMap((a) => a.data.tags))
+).slice(0, 6);
+---
+
+<Layout
+  title="Calcio Inglese — Premier League News, Transfers & Analysis"
+  description="Independent English-language coverage of the Premier League: breaking transfer news, match reports and analysis, published daily."
+>
+  <div class="wrap hero-section">
+    {hero && (
+      <div class="hero-grid">
+        <ArticleCard {...hero.data} slug={hero.id} size="hero" />
+        <div class="hero-side">
+          {side1 && <ArticleCard {...side1.data} slug={side1.id} size="side" />}
+          {side2 && <ArticleCard {...side2.data} slug={side2.id} size="side" />}
+        </div>
+      </div>
+    )}
+
+    <div class="main-layout">
+      <div>
+        <div class="sec-head">
+          <h2>Latest news</h2>
+          <a href="/news/">View all →</a>
+        </div>
+        <div class="news-grid">
+          {gridItems.map((item) => (
+            <ArticleCard {...item.data} slug={item.id} size="grid" />
+          ))}
+        </div>
+      </div>
+
+      <aside>
+        <StandingsWidget />
+        <FixturesWidget />
+        {trendingTags.length > 0 && (
+          <div class="widget">
+            <div class="widget-head">Trending</div>
+            <div class="tags-cloud">
+              {trendingTags.map((tag) => (
+                <a href={`/news/tag/${tag.toLowerCase().replace(/\s+/g, '-')}/`}>{tag}</a>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-section { padding: 28px 0 8px; }
+  .hero-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+  .hero-side { display: flex; flex-direction: column; gap: 16px; }
+  .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 28px; padding-bottom: 50px; }
+  .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  .widget { background: var(--white); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 22px; overflow: hidden; }
+  .widget-head {
+    background: var(--navy); color: #fff; font-family: 'Archivo Black', sans-serif;
+    font-size: 13px; letter-spacing: .03em; padding: 12px 16px; text-transform: uppercase;
+  }
+  .tags-cloud { padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags-cloud a {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 20px;
+    padding: 6px 12px; font-size: 12px; font-weight: 700; color: var(--ink);
+  }
+
+  @media (max-width: 860px) {
+    .hero-grid, .main-layout, .news-grid { grid-template-columns: 1fr; }
+  }
+</style>
