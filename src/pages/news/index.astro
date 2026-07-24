@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import NewsGridPage from '../../components/NewsGridPage.astro';
+
+const entries = (await getCollection('news', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<NewsGridPage
+  title="All Premier League News"
+  description="Every Premier League news story from Calcio Inglese — transfers, match reports and analysis."
+  heading="All news"
+  entries={entries}
+/>

@@ -1,0 +1,128 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ArticleThumb from '../../components/ArticleThumb.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+export async function getStaticPaths() {
+  const allNews = await getCollection('news', ({ data }) => !data.draft);
+  return allNews.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry, allNews },
+  }));
+}
+
+const { entry, allNews } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, pubDate, updatedDate, category, teamA, teamB, author, tags } = entry.data;
+
+const related = allNews
+  .filter((a) => a.id !== entry.id && a.data.category === category)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const canonical = new URL(`/news/${entry.id}/`, Astro.site);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  author: { '@type': 'Organization', name: 'Calcio Inglese' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Calcio Inglese',
+    logo: { '@type': 'ImageObject', url: 'https://calcioinglese.org/logo-mark-512.png' },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical.toString() },
+  articleSection: category,
+};
+
+const dateFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout
+  title={title}
+  description={description}
+  type="article"
+  publishedDate={pubDate}
+  modifiedDate={updatedDate ?? pubDate}
+  articleSchema={articleSchema}
+>
+  <article class="wrap article-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> / <a href={`/news/${category.toLowerCase().replace(/\s+/g, '-')}/`}>{category}</a>
+    </nav>
+
+    <span class="cat">{category}</span>
+    <h1>{title}</h1>
+    <p class="dek">{description}</p>
+    <div class="byline">
+      <b>{author}</b> · <time datetime={pubDate.toISOString()}>{dateFmt.format(pubDate)}</time>
+    </div>
+
+    <div class="hero-thumb">
+      <ArticleThumb category={category} teamA={teamA} teamB={teamB} />
+    </div>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {tags.length > 0 && (
+      <div class="tags">
+        {tags.map((t: string) => (
+          <a href={`/news/tag/${t.toLowerCase().replace(/\s+/g, '-')}/`}>#{t.replace(/\s+/g, '')}</a>
+        ))}
+      </div>
+    )}
+
+    {related.length > 0 && (
+      <section class="related">
+        <div class="sec-head"><h2>More {category}</h2></div>
+        <div class="related-grid">
+          {related.map((r) => (
+            <ArticleCard {...r.data} slug={r.id} size="grid" />
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</Layout>
+
+<style>
+  .article-page { max-width: 760px; padding-top: 28px; padding-bottom: 60px; }
+  .breadcrumb { font-size: 12.5px; color: var(--gray); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--gray); }
+  .cat {
+    font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--green-dark);
+    text-transform: uppercase; display: block; margin-bottom: 10px;
+  }
+  h1 { font-family: 'Archivo Black', sans-serif; font-size: 32px; line-height: 1.2; margin-bottom: 14px; }
+  .dek { font-size: 17px; color: var(--gray); margin-bottom: 14px; }
+  .byline { font-size: 13px; color: var(--gray); font-weight: 600; margin-bottom: 22px; }
+  .byline b { color: var(--ink); }
+  .hero-thumb { border-radius: 10px; overflow: hidden; margin-bottom: 26px; }
+  .hero-thumb svg { display: block; width: 100%; height: auto; }
+  .prose { font-size: 17px; line-height: 1.75; color: var(--ink); }
+  .prose :global(p) { margin-bottom: 20px; }
+  .prose :global(h2) { font-family: 'Archivo Black', sans-serif; font-size: 22px; margin: 32px 0 14px; }
+  .prose :global(blockquote) {
+    border-left: 4px solid var(--green); padding-left: 16px; margin: 24px 0;
+    font-style: italic; color: var(--gray);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+  .tags a {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 20px;
+    padding: 6px 12px; font-size: 12.5px; font-weight: 700;
+  }
+  .related { margin-top: 50px; }
+  .related-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  @media (max-width: 860px) {
+    h1 { font-size: 24px; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>
