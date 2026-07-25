@@ -12,13 +12,18 @@ const { category, teamA, teamB } = Astro.props;
 const a = teamA ? TEAMS[teamA] : undefined;
 const b = teamB ? TEAMS[teamB] : undefined;
 
+// All values must stay light/high-luminance — the badge label text below is
+// always dark navy (#0B1930), so a dark tag color makes the text unreadable
+// (this previously broke the "Club News" tag, which was the same navy as
+// the text itself).
 const CATEGORY_COLORS: Record<string, string> = {
   'Transfer News': '#F5A623',
-  'Match Report': '#16A34A',
-  'Club News': '#0B1930',
-  'Analysis': '#0057B8',
-  'Injury News': '#D85A30',
-  'Pre-Season': '#6C1D45',
+  'Match Report': '#4ADE80',
+  'Club News': '#93C5FD',
+  'Analysis': '#C4B5FD',
+  'Injury News': '#FB923C',
+  'Pre-Season': '#F9A8D4',
+  'Features': '#5EEAD4',
 };
 const tagColor = CATEGORY_COLORS[category] ?? '#F5A623';
 ---
