@@ -16,7 +16,7 @@ import { TEAMS } from '../data/teams';
       {STANDINGS.map((row) => {
         const team = TEAMS[row.team];
         return (
-          <tr class={row.qualifies === 'ucl' ? 'qual' : ''}>
+          <tr class={row.qualifies ? `qual-${row.qualifies}` : ''}>
             <td class="pos">{row.pos}</td>
             <td>
               <div class="team-cell">
@@ -31,7 +31,12 @@ import { TEAMS } from '../data/teams';
       })}
     </tbody>
   </table>
-  <a class="widget-more" href="/standings/">Full table →</a>
+  <div class="legend">
+    <span><i class="key key-ucl"></i>Champions League</span>
+    <span><i class="key key-uel"></i>Europa League</span>
+    <span><i class="key key-uecl"></i>Conference League</span>
+    <span><i class="key key-rel"></i>Relegation</span>
+  </div>
 </div>
 
 <style>
@@ -68,16 +73,25 @@ import { TEAMS } from '../data/teams';
   table.standings tbody tr:last-child td { border-bottom: none; }
   td.pos { font-weight: 800; width: 22px; }
   td.num, th.num { font-weight: 800; text-align: right; }
-  .qual { box-shadow: inset 3px 0 0 var(--green); }
+  .qual-ucl { box-shadow: inset 3px 0 0 #1B5FD9; }
+  .qual-uel { box-shadow: inset 3px 0 0 #E8720C; }
+  .qual-uecl { box-shadow: inset 3px 0 0 #2AA876; }
+  .qual-rel { box-shadow: inset 3px 0 0 #D62839; }
   .team-cell { display: flex; align-items: center; gap: 8px; }
   .dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
-  .widget-more {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--green-dark);
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    padding: 10px 14px;
     border-top: 1px solid var(--line);
+    font-size: 10.5px;
+    color: var(--gray);
   }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .key { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+  .key-ucl { background: #1B5FD9; }
+  .key-uel { background: #E8720C; }
+  .key-uecl { background: #2AA876; }
+  .key-rel { background: #D62839; }
 </style>
