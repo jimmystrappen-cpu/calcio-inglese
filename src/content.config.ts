@@ -15,6 +15,7 @@ const news = defineCollection({
       'Analysis',
       'Injury News',
       'Pre-Season',
+      'Features',
     ]),
     teamA: z.string().optional(),
     teamB: z.string().optional(),
