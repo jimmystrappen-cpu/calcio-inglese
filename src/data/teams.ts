@@ -34,4 +34,10 @@ export const TEAMS: Record<string, Team> = {
   // can show both sides of a deal.
   barcelona: { name: 'Barcelona', short: 'BAR', primary: '#A50044', secondary: '#004D98' },
   realmadrid: { name: 'Real Madrid', short: 'RMA', primary: '#FFFFFF', secondary: '#00529F' },
+
+  // Relegated from the Premier League at the end of 2025/26 — kept here only
+  // so the historical final table on /standings/ can render all 20 clubs.
+  westham: { name: 'West Ham United', short: 'WHU', primary: '#7A263A', secondary: '#1BB1E7' },
+  wolves: { name: 'Wolverhampton Wanderers', short: 'WOL', primary: '#FDB913', secondary: '#231F20' },
+  burnley: { name: 'Burnley', short: 'BUR', primary: '#6C1D45', secondary: '#99D6EA' },
 };
