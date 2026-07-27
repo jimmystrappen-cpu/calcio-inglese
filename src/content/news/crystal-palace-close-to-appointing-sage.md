@@ -7,6 +7,7 @@ teamA: "crystalpalace"
 tags: ["Crystal Palace", "manager news", "Pierre Sage"]
 author: "Calcio Inglese Staff"
 sourceNote: "Public reporting on 2026-27 summer window, PL transfer tracker"
+heroEmbed: "<a id='XqycJrjLQn1KxUTYPb3FCQ' class='gie-single' href='https://www.gettyimages.com/detail/2263380442' target='_blank' style='color:#a7a7a7;text-decoration:none;font-weight:normal !important;border:none;display:inline-block;'>Embed from Getty Images</a><script>window.gie=window.gie||function(c){(gie.q=gie.q||[]).push(c)};gie(function(){gie.widgets.load({id:'XqycJrjLQn1KxUTYPb3FCQ',sig:'xlll4w3gzjKTzEIXvk38N73Mkx4h5XzU3R5BRvwAPYU=',w:'594px',h:'396px',items:'2263380442',caption: true ,tld:'com',is360: false })});</script><script src='//embed-cdn.gettyimages.com/widgets.js' charset='utf-8' async></script>"
 ---
 
 Crystal Palace are closing in on the appointment of Pierre Sage as their new head coach, with the Lens manager the leading candidate to take charge at Selhurst Park. The move would end the club's search for a successor following Oliver Glasner's departure, a process that has been closely watched given Palace's recent progress under their outgoing manager.
