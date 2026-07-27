@@ -7,6 +7,7 @@ teamA: "ipswich"
 tags: ["Ipswich", "manager news", "Kieran McKenna"]
 author: "Calcio Inglese Staff"
 sourceNote: "Public reporting on 2026-27 summer window, PL transfer tracker"
+heroEmbed: "<a id='jGjNV0xIQgBQaiE0LL4OUg' class='gie-single' href='https://www.gettyimages.com/detail/2184010742' target='_blank' style='color:#a7a7a7;text-decoration:none;font-weight:normal !important;border:none;display:inline-block;'>Embed from Getty Images</a><script>window.gie=window.gie||function(c){(gie.q=gie.q||[]).push(c)};gie(function(){gie.widgets.load({id:'jGjNV0xIQgBQaiE0LL4OUg',sig:'NE62G4M_2gnExtBCpHDJdTcrbSuRYpW1z9abvwzKlFQ=',w:'594px',h:'396px',items:'2184010742',caption: true ,tld:'com',is360: false })});</script><script src='//embed-cdn.gettyimages.com/widgets.js' charset='utf-8' async></script>"
 ---
 
 Ipswich Town have confirmed that Kieran McKenna has resigned as manager, ending an association that turned him into one of the most admired young coaches in English football. The timing is notable, coming shortly before Ipswich were due to begin preparations for a new Premier League campaign, and leaves the club needing to move quickly to identify a successor.
