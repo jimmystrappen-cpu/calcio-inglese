@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 const { entry, allNews } = Astro.props;
 const { Content } = await render(entry);
-const { title, description, pubDate, updatedDate, category, teamA, teamB, author, tags } = entry.data;
+const { title, description, pubDate, updatedDate, category, teamA, teamB, author, tags, heroEmbed } = entry.data;
 
 const related = allNews
   .filter((a) => a.id !== entry.id && a.data.category === category)
@@ -64,7 +64,11 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long'
     </div>
 
     <div class="hero-thumb">
-      <ArticleThumb category={category} teamA={teamA} teamB={teamB} />
+      {heroEmbed ? (
+        <Fragment set:html={heroEmbed} />
+      ) : (
+        <ArticleThumb category={category} teamA={teamA} teamB={teamB} />
+      )}
     </div>
 
     <div class="prose">
@@ -106,6 +110,8 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long'
   .byline b { color: var(--ink); }
   .hero-thumb { border-radius: 10px; overflow: hidden; margin-bottom: 26px; }
   .hero-thumb svg { display: block; width: 100%; height: auto; }
+  .hero-thumb :global(.gie-single) { display: block; width: 100% !important; }
+  .hero-thumb :global(img) { width: 100%; height: auto; display: block; }
   .prose { font-size: 17px; line-height: 1.75; color: var(--ink); }
   .prose :global(p) { margin-bottom: 20px; }
   .prose :global(h2) { font-family: 'Archivo Black', sans-serif; font-size: 22px; margin: 32px 0 14px; }
