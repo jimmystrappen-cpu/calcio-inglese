@@ -8,7 +8,9 @@ teamB: "bournemouth"
 tags: ["transfer news", "Tottenham", "Bournemouth", "defender"]
 author: "Calcio Inglese Staff"
 sourceNote: "Public reporting on 2026-27 summer window, PL transfer tracker"
----
+heroEmbed: |
+  <a id='IX2fIVOfROFdXqQHyNzSpA' class='gie-single' href='https://www.gettyimages.com/detail/2261022636' target='_blank' style='color:#a7a7a7;text-decoration:none;font-weight:normal !important;border:none;display:inline-block;'>Embed from Getty Images</a><script>window.gie=window.gie||function(c){(gie.q=gie.q||[]).push(c)};gie(function(){gie.widgets.load({id:'IX2fIVOfROFdXqQHyNzSpA',sig:'1GITPTktz268yqdbk8kl0Air0JZOZ2d1JXymRqIv9kU=',w:'594px',h:'396px',items:'2261022636',caption: true ,tld:'com',is360: false })});</script><script src='//embed-cdn.gettyimages.com/widgets.js' charset='utf-8' async></script>
+  ---
 
 Tottenham Hotspur have confirmed the signing of centre-back Marcos Senesi on a free transfer, bringing an end to his four-year stint at Bournemouth. The Argentine defender arrives at N17 without a fee changing hands after his contract on the south coast expired, giving Spurs a experienced addition to their backline ahead of the new campaign.
 
