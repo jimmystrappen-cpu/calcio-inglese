@@ -1,15 +1,16 @@
 {
-  "_comment": "Tracks BBC Sport RSS item GUIDs already converted into Calcio Inglese articles, so the automated pipeline never republishes the same story twice. Updated by the news-aggregation scheduled task after every run.",
-  "feed": "https://feeds.bbci.co.uk/sport/football/premier-league/rss.xml",
-  "processedGuids": [
-    "https://www.bbc.com/sport/football/articles/cp8r74rr95po#1",
-    "https://www.bbc.com/sport/football/articles/c17yd0p0597o#1",
-    "https://www.bbc.com/sport/football/articles/cql1v2ped53o#3",
-    "https://www.bbc.com/sport/football/articles/cddl0glz4p7o#1",
-    "https://www.bbc.com/sport/football/articles/ckg0lj8lq22o#3",
-    "https://www.bbc.com/sport/football/articles/cjdgnmvgv8po#1",
-    "https://www.bbc.com/sport/football/articles/cd7wn0erlvwo#1",
-    "https://www.bbc.com/sport/football/articles/cqx1wqr3yjno#1"
-  ],
-  "lastRun": "2026-07-27T09:20:00Z"
+    "_comment": "Tracks BBC Sport RSS item GUIDs already converted into Calcio Inglese articles, so the automated pipeline never republishes the same story twice. Updated by the news-aggregation scheduled task after every run.",
+    "feed": "https://feeds.bbci.co.uk/sport/football/premier-league/rss.xml",
+    "processedGuids": [
+          "https://www.bbc.com/sport/football/articles/cp8r74rr95po#1",
+          "https://www.bbc.com/sport/football/articles/c17yd0p0597o#1",
+          "https://www.bbc.com/sport/football/articles/cql1v2ped53o#3",
+          "https://www.bbc.com/sport/football/articles/cddl0glz4p7o#1",
+          "https://www.bbc.com/sport/football/articles/ckg0lj8lq22o#3",
+          "https://www.bbc.com/sport/football/articles/cjdgnmvgv8po#1",
+          "https://www.bbc.com/sport/football/articles/cd7wn0erlvwo#1",
+          "https://www.bbc.com/sport/football/articles/cqx1wqr3yjno#1",
+          "https://www.bbc.com/sport/football/articles/c5yzv0p2p2zo#1"
+    ],
+    "lastRun": "2026-07-27T14:30:00Z"
 }
