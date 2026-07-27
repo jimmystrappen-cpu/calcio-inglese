@@ -23,6 +23,10 @@ const news = defineCollection({
     author: z.string().default('Calcio Inglese Staff'),
     // Internal fact-checking reference only — never rendered on the site.
     sourceNote: z.string().optional(),
+    // Raw HTML embed snippet for a real editorial photo (e.g. a Getty Images
+    // Embed widget). Optional — when absent, the article falls back to the
+    // generated ArticleThumb SVG placeholder.
+    heroEmbed: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });
