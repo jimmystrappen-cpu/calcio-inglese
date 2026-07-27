@@ -65,7 +65,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long'
 
     <div class="hero-thumb">
       {heroEmbed ? (
-        <Fragment set:html={heroEmbed} />
+        <div class="getty-wrap"><Fragment set:html={heroEmbed} /></div>
       ) : (
         <ArticleThumb category={category} teamA={teamA} teamB={teamB} />
       )}
@@ -110,8 +110,16 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long'
   .byline b { color: var(--ink); }
   .hero-thumb { border-radius: 10px; overflow: hidden; margin-bottom: 26px; }
   .hero-thumb svg { display: block; width: 100%; height: auto; }
-  .hero-thumb :global(.gie-single) { display: block; width: 100% !important; }
   .hero-thumb :global(img) { width: 100%; height: auto; display: block; }
+  .getty-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 594 / 396;
+  }
+  .getty-wrap :global(iframe) {
+    position: absolute !important; top: 0; left: 0;
+    width: 100% !important; height: 100% !important; border: 0;
+  }
   .prose { font-size: 17px; line-height: 1.75; color: var(--ink); }
   .prose :global(p) { margin-bottom: 20px; }
   .prose :global(h2) { font-family: 'Archivo Black', sans-serif; font-size: 22px; margin: 32px 0 14px; }
